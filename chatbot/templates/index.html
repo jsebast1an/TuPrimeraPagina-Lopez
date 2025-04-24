@@ -36,13 +36,20 @@
 <body>
     <header>
         <h1>Bienvenido al Chatbot</h1>
+        <a href="/admin" class="btn-admin" style="color: white; text-decoration: none; background-color: #333; padding: 0.5rem 1rem; border-radius: 5px;">Admin</a>
     </header>
     <main>
-        <p>Esta es una página básica para tu chatbot.</p>
-        <button onclick="alert('¡Hola! ¿En qué puedo ayudarte?')">Iniciar Chat</button>
+        <div>
+            <h2>Esta es una página básica para modelar un chatbot conectado a OPEN AI.</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
     </main>
     <footer>
-        <p>&copy; 2023 Chatbot. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Chatbot. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
