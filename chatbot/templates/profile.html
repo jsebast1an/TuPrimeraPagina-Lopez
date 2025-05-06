@@ -1,3 +1,4 @@
+<!-- templates/chat.html -->
 {% extends "base.html" %}
 
 {% block title %}Chat{% endblock %}
@@ -10,15 +11,9 @@ main {
 {% endblock %}
 
 {% block content %}
-
-    <h2>Coder House final project.</h2>
     {% if user.is_authenticated %}
         <h1>Welcome, {{ user.username }}!</h1>
         <p>Your email: {{ user.email }}</p>
-        <a href="/logout" class="button" style="display: inline-block; padding: 10px 20px; background-color:rgb(255, 12, 12); color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">
-            Logout
-        </a>
-
     {% else %}
         <p>You are not logged in.</p>
         <a href="/login" class="button" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">Login</a>

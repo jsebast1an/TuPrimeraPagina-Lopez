@@ -1,0 +1,13 @@
+<!-- templates/chat.html -->
+{% extends "base.html" %}
+
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">Chatbot</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success" type="submit">Enviar</button>
+    </form>
+{% endblock %}
