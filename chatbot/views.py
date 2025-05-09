@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 from .forms import ChatMessageForm
+
 # views.py
 """ def index(request):
     return render(request, 'index.html') """
@@ -34,15 +36,9 @@ def chat_view(request):
     return render(request, 'chat.html', {'form': form})
 
 def users_view(request):
-    if request.method == 'POST':
-        form = ChatMessageForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('users')  # redirige a la misma vista (o donde quieras)
-    else:
-        form = ChatMessageForm()
-    
-    return render(request, 'users.html', {'form': form})
+    users = User.objects.all() 
+
+    return render(request, 'users.html', {'users': users})
 
 def about_view(request):
     if request.method == 'POST':
