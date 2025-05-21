@@ -1,13 +1,23 @@
 <!-- templates/chat.html -->
 {% extends "base.html" %}
 
-{% block title %}Chat{% endblock %}
+{% block title %}About Me{% endblock %}
 
 {% block content %}
-    <h2>Coder Hose</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar</button>
-    </form>
+<div id="about-me" style="max-width: 900px; margin: auto; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-family: sans-serif;">
+        <h2 >About Me</h2>
+        <h3 style="font-size: 2rem; margin-bottom: 0.5rem;margin-top:2rem; color: #333;">Juan Sebastián López</h2>
+        <p style="font-size: 1.5rem; line-height: 1.5; color: #555;">
+            Desarrollador full-stack con 3+ años de experiencia en Laravel y JavaScript, ahora ampliando horizontes con Python y Django.  
+            Apasionado por crear soluciones inteligentes: desde integraciones con Plumsail y APIs en Google Apps Script hasta agentes de IA para optimizar flujos legales.
+        </p>
+        <ul style="list-style: none; padding: 0; margin-top: 1rem; color: #555;">
+            <li>💻 Laravel • ReactJs • Blade</li>
+            <li>⚙️ JavaScript (ES6+) • Node.js</li>
+            <li>🐍 Python • Django • Machine Learning</li>
+            <li>🔗 API integration • Webhooks • Google Apps Script</li>
+            <li>🤖 Software • Power Automate • Procesamiento de documentos</li>
+        </ul>
+    </div>
+
 {% endblock %}
