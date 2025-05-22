@@ -22,6 +22,14 @@ def home_view(request):
 def profile_view(request):
 
     user = request.user  # Obtiene el usuario actual    
+    if request.method == 'POST':
+        new_username = request.POST.get('username')
+        new_email = request.POST.get('email')
+        if new_username:
+            user.username = new_username
+        if new_email:
+            user.email = new_email
+        user.save()
     return render(request, 'profile.html', {'user': user})
 
 def chat_view(request):

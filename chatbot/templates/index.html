@@ -5,23 +5,46 @@
 {% block style %}
 main {
     padding: 2rem;
-    text-align: center;
+    margin: 0 auto;
 }
 {% endblock %}
 
 {% block content %}
+    <div class="container mt-5">
+        {% if user.is_authenticated %}
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div>
+                    <h1 style="margin-bottom: 0;">Coder House final project.</h1>
+                    <p class="self-align:start" style="margin-bottom: 0;">by: {{ user.username }}</p>
+                    <h2 style="margin-bottom: 0;">Welcome, {{ user.username }}!</h2>
+                </div>
+                <div class="btn-group" role="group" aria-label="User actions">
+                    <a href="/admin" class="btn btn-success">Admin</a>
+                    <a href="/logout" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+            <div style="margin: 2rem auto; max-width: 600px; text-align: left;">
+                <h3>About this Chatbot</h3>
+                <p>
+                This is a sample chatbot project developed as a final project for Coder House. The chatbot is currently connected to OpenAI, allowing you to interact with advanced AI models for natural language conversations.
+                </p>
+                <ul>
+                <li>Powered by OpenAI's API</li>
+                <li>Secure user authentication</li>
+                <li>Simple and intuitive chat interface</li>
+                <li>Ongoing development: more features coming soon!</li>
+                </ul>
+                <p>
+                Feel free to test the chatbot and provide feedback. Your input will help improve the project as it evolves.
+                </p>
+            </div>
 
-    <h2>Coder House final project.</h2>
-    {% if user.is_authenticated %}
-        <h1>Welcome, {{ user.username }}!</h1>
-        <p>Your email: {{ user.email }}</p>
-        <a href="/logout" class="button" style="display: inline-block; padding: 10px 20px; background-color:rgb(255, 12, 12); color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">
-            Logout
-        </a>
+        {% else %}
+            <h1>Coder House final project.</h2>
+            <p>You are not logged in.</p>
+            <a href="/login" class="button" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">Login</a>
+            <a href="/admin" class="button" style="display: inline-block; padding: 10px 20px; background-color: #28A745; color: white; text-decoration: none; border-radius: 5px;">Admin</a>
+        {% endif %}
+    </div>
 
-    {% else %}
-        <p>You are not logged in.</p>
-        <a href="/login" class="button" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">Login</a>
-        <a href="/admin" class="button" style="display: inline-block; padding: 10px 20px; background-color: #28A745; color: white; text-decoration: none; border-radius: 5px;">Admin</a>
-    {% endif %}
 {% endblock %}
