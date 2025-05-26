@@ -1,0 +1,38 @@
+# Mi Proyecto Django: Chatbot con OpenAI
+
+## Descripción  
+Este proyecto es una aplicación web en Django que incluye:  
+- Una página **Home** con la descripción general del proyecto.  
+- Un perfil de usuario (**Profile**) donde el usuario registrado puede actualizar su nombre y correo.  
+- Un chat (**Chat**) integrado con la API de OpenAI (ChatGPT).  
+- Una lista de todos los **Users** registrados.  
+- Una sección **About Me** con información sobre el autor.
+
+---
+
+## Tecnologías  
+- **Backend**: Python 3.10+, Django 5.2  
+- **Frontend**: HTML5, Bootstrap 
+- **API**: OpenAI Python SDK (`openai`)  
+- **Base de datos**: SQLite.  
+
+---
+
+## Vistas / URL  
+| Nombre de la vista | URL estándar          | Descripción                                    |
+|--------------------|-----------------------|------------------------------------------------|
+| Home               | `/` o `{% url 'home' %}`    | Página inicial con descripción del proyecto.   |
+| Profile            | `/profile/`           | Perfil del usuario; permite editar nombre y email. |
+| Chat               | `/chat/`              | Interfaz de chat que envía y recibe mensajes de OpenAI. |
+| Users              | `/users/`             | Listado de todos los usuarios registrados.     |
+| About Me           | `/about/`             | Página “Sobre mí” con información del autor.   |
+
+En tu plantilla base tienes un `<nav>` como:
+```html
+<nav>
+  <a href="{% url 'home' %}">Home</a>
+  <a href="{% url 'profile' %}">Profile</a>
+  <a href="{% url 'chat' %}">Chat</a>
+  <a href="{% url 'users' %}">Users</a>
+  <a href="{% url 'about' %}">About Me</a>
+</nav>
