@@ -3,10 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .forms import ChatMessageForm
-
-# views.py
-""" def index(request):
-    return render(request, 'index.html') """
+from .models import ChatMessage
+from openai import OpenAI
 
 def home_view(request):
     if request.method == 'POST':
@@ -32,16 +30,36 @@ def profile_view(request):
         user.save()
     return render(request, 'profile.html', {'user': user})
 
+
 def chat_view(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ChatMessageForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('chat')  # redirige a la misma vista (o donde quieras)
+            # Creamos instancia sin guardar aún user ni response
+            chat = form.save(commit=False)
+            chat.user = request.user
+            chat.save()
+            client = OpenAI()
+            # Llamada a OpenAI
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user",   "content": chat.message},
+                ],
+            )
+            chat.response = resp.choices[0].message.content.strip()
+            chat.save()
+
+            return redirect('chat')
     else:
         form = ChatMessageForm()
-    
-    return render(request, 'chat.html', {'form': form})
+
+    messages = ChatMessage.objects.select_related('user').order_by('timestamp')
+    return render(request, "chat.html", {
+        'form': form,
+        'messages': messages,
+    })
 
 def users_view(request):
     users = User.objects.all() 
