@@ -25,14 +25,7 @@ Este proyecto es una aplicación web en Django que incluye:
 | Profile            | `/profile/`           | Perfil del usuario; permite editar nombre y email. |
 | Chat               | `/chat/`              | Interfaz de chat que envía y recibe mensajes de OpenAI. |
 | Users              | `/users/`             | Listado de todos los usuarios registrados.     |
-| About Me           | `/about/`             | Página “Sobre mí” con información del autor.   |
+| About Me           | `/about/`             | Página “Sobre mí”.   |
+| Login              | `/login/`             | Página para logearte.   |
+| Register           | `/register/`          | Puedes registrarte aquí.   |
 
-En tu plantilla base tienes un `<nav>` como:
-```html
-<nav>
-  <a href="{% url 'home' %}">Home</a>
-  <a href="{% url 'profile' %}">Profile</a>
-  <a href="{% url 'chat' %}">Chat</a>
-  <a href="{% url 'users' %}">Users</a>
-  <a href="{% url 'about' %}">About Me</a>
-</nav>
