@@ -29,3 +29,8 @@ Este proyecto es una aplicación web en Django que incluye:
 | Login              | `/login/`             | Página para logearte.   |
 | Register           | `/register/`          | Puedes registrarte aquí.   |
 
+## Enlace del video
+https://drive.google.com/drive/folders/1mlgBMnrgDiHCedJqAPHY-tqqrZHZYGoh?usp=sharing
+
+Sebastián López
+Full Stack Developer

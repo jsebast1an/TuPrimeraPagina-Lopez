@@ -11,7 +11,7 @@ def home_view(request):
         form = ChatMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')  # redirige a la misma vista (o donde quieras)
+            return redirect('index')
     else:
         form = ChatMessageForm()
     
