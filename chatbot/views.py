@@ -21,18 +21,13 @@ def home_view(request):
     
     return render(request, 'index.html', {'form': form})
 
-def profile_view(request):
-
-    user = request.user  # Obtiene el usuario actual    
-    if request.method == 'POST':
-        new_username = request.POST.get('username')
-        new_email = request.POST.get('email')
-        if new_username:
-            user.username = new_username
-        if new_email:
-            user.email = new_email
-        user.save()
-    return render(request, 'profile.html', {'user': user})
+class ProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'profile.html'
+    context_object_name = 'user'
+    
+    def get_object(self):
+        return self.request.user
 
 
 def chat_view(request):

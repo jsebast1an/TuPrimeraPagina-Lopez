@@ -12,26 +12,13 @@ main {
 
 {% block content %}
     <div class="container mt-5">
-        {% if user.is_authenticated %}
-            <h1 class="mb-4">Welcome, {{ user.username }}!</h1>
-            <form method="post" action="" class="card p-4 shadow-sm" style="max-width: 400px; margin: 0 auto;">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="id_username" class="form-label">Username:</label>
-                    <input type="text" id="id_username" name="username" class="form-control" value="{{ user.username }}">
-                </div>
-                <div class="mb-3">
-                    <label for="id_email" class="form-label">Email:</label>
-                    <input type="email" id="id_email" name="email" class="form-control" value="{{ user.email }}">
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Update</button>
-            </form>
-        {% else %}
-            <div class="alert alert-warning" role="alert">
-                You are not logged in.
-            </div>
-            <a href="/login" class="btn btn-primary me-2">Login</a>
-            <a href="/admin" class="btn btn-success">Admin</a>
-        {% endif %}
+        <h1 class="mb-4"> {{ user.username }}'s profile</h1>
+
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Name:</strong> {{ user.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+
+        <a href="{% url 'user-edit' user.id %}" class="btn btn-primary">Edit profile</a>
     </div>
 {% endblock %}
