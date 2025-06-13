@@ -5,11 +5,13 @@
 
 {% block content %}
     <h2>Users</h2>
+    <a class="btn btn-success" href="{% url 'user-create' %}"> > Create new user</a>
     <table style="width: 100%; border-collapse: collapse; text-align: left; margin-top: 20px;">
         <thead>
             <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
                 <th style="padding: 10px; border: 1px solid #ddd;">Username</th>
                 <th style="padding: 10px; border: 1px solid #ddd;">Email</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +19,15 @@
                 <tr style="border-bottom: 1px solid #ddd;">
                     <td style="padding: 10px; border: 1px solid #ddd;">{{ user.username }}</td>
                     <td style="padding: 10px; border: 1px solid #ddd;">{{ user.email }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        <a href="{% url 'user-detail' user.id %}">Details</a> |
+                        <a href="{% url 'user-edit' user.id %}">Edit</a> |
+                        <a href="{% url 'user-delete' user.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2" style="padding: 10px; text-align: center; border: 1px solid #ddd;">No users found.</td>
                 </tr>
             {% endfor %}
         </tbody>

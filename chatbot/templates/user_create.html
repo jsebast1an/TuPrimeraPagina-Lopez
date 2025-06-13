@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="card card-body mb-3" style="width: 18rem;margin: auto;">
+    <h2 class="mb-4">Create User</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success mb-3" type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

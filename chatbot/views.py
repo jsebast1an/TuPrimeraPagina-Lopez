@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from .forms import ChatMessageForm
 from .models import ChatMessage
 from openai import OpenAI
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, UpdateView, DetailView
+from django.views.generic.edit import CreateView, DeleteView
+from django.urls import reverse_lazy
 
 def home_view(request):
     if request.method == 'POST':
@@ -101,3 +105,44 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+""" Users """
+
+class UserListView(LoginRequiredMixin, ListView):
+    model = User
+    template_name = 'users.html'
+    context_object_name = 'users'
+    login_url = '/login/'
+
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'user_detail.html'
+    context_object_name = 'user'
+
+
+class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = User
+    fields = ['first_name', 'last_name', 'email']
+    template_name = 'user_form.html'
+    success_url = reverse_lazy('users')
+
+    def test_func(self):
+        return self.request.user == self.get_object()
+class UserCreateView(LoginRequiredMixin, CreateView):
+    model = User
+    fields = ['username', 'first_name', 'last_name', 'email', 'password']
+    template_name = 'user_create.html'
+    success_url = reverse_lazy('users')
+
+    def form_valid(self, form):
+        # Guardar el usuario con contraseña encriptada
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        return super().form_valid(form)
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    model = User
+    template_name = 'user_delete.html'
+    success_url = reverse_lazy('users')
+    context_object_name = 'user'

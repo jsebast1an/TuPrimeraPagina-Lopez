@@ -1,0 +1,15 @@
+<!-- templates/chat.html -->
+{% extends "base.html" %}
+
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+    <h2>User detail</h2>
+
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Nombre:</strong> {{ user.first_name }}</p>
+    <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+
+    <a href="{% url 'user-edit' user.id %}">Editar</a>
+{% endblock %}
